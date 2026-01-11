@@ -1,0 +1,85 @@
+{
+  "name": "Hubert",
+  "title": "Der Halbling Barde",
+  "race": "Halbling (Lightfoot)",
+  "class": "Barde",
+  "level": 3,
+  "background": "Unterhalter",
+  "alignment": "Chaotisch Gut",
+  "experience": 900,
+  "proficiencyBonus": 2,
+  "inspiration": 1,
+  "hitPoints": {
+    "current": 21,
+    "max": 21,
+    "temporary": 0
+  },
+  "armorClass": 14,
+  "initiative": 3,
+  "speed": "25 ft",
+  "hitDice": "3d8",
+  "passivePerception": 13,
+  "savingThrows": [
+    { "name": "Geschicklichkeit", "bonus": 5, "proficient": true },
+    { "name": "Charisma", "bonus": 5, "proficient": true }
+  ],
+  "abilityScores": [
+    { "name": "Stärke", "score": 8, "modifier": -1 },
+    { "name": "Geschicklichkeit", "score": 16, "modifier": 3 },
+    { "name": "Konstitution", "score": 12, "modifier": 1 },
+    { "name": "Intelligenz", "score": 10, "modifier": 0 },
+    { "name": "Weisheit", "score": 13, "modifier": 1 },
+    { "name": "Charisma", "score": 16, "modifier": 3 }
+  ],
+  "skills": [
+    { "name": "Akrobatik", "ability": "GES", "bonus": 5, "proficient": true },
+    { "name": "Auftreten", "ability": "CHA", "bonus": 5, "proficient": true },
+    { "name": "Heimlichkeit", "ability": "GES", "bonus": 5, "proficient": true },
+    { "name": "Überreden", "ability": "CHA", "bonus": 5, "proficient": true },
+    { "name": "Wahrnehmung", "ability": "WEI", "bonus": 3, "proficient": true },
+    { "name": "Geschichte", "ability": "INT", "bonus": 2, "proficient": false }
+  ],
+  "attacks": [
+    { "name": "Dolch", "bonus": 5, "damage": "1d4 + 3 Stich" },
+    { "name": "Kurzbogen", "bonus": 5, "damage": "1d6 + 3 Stich" },
+    { "name": "Bardenzauber", "bonus": 5, "damage": "Zauberabhängig" }
+  ],
+  "features": [
+    "Bardeninspiration (W6, 3x/Tag)",
+    "Taschenspielertricks (Cantrips)",
+    "Halblingsglück",
+    "Mutig",
+    "Natürliches Schleichen"
+  ],
+  "spellcasting": {
+    "castingAbility": "Charisma",
+    "spellSaveDC": 13,
+    "spellAttackBonus": 5,
+    "spellSlots": {
+      "level1": { "total": 4, "used": 1 },
+      "level2": { "total": 2, "used": 0 }
+    },
+    "cantrips": ["Vicious Mockery", "Mage Hand"],
+    "prepared": [
+      "Heilendes Wort",
+      "Schlaf",
+      "Dissonantes Flüstern",
+      "Charme Person",
+      "Verkleiden"
+    ]
+  },
+  "equipment": [
+    "Laute",
+    "Lederüstung",
+    "Dolch x2",
+    "Abenteurerpaket",
+    "Flöte",
+    "Reiseumhang"
+  ],
+  "personality": {
+    "traits": "Stellt seine Freunde immer auf die Bühne.",
+    "ideals": "Freiheit — Kunst gehört allen.",
+    "bonds": "Schuldet der Taverne Zum Smaragddrachen einen Gefallen.",
+    "flaws": "Kann keinem guten Wettstreit widerstehen."
+  }
+}
