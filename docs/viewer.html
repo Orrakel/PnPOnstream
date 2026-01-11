@@ -23,15 +23,17 @@
 
     body {
       margin: 0;
-      padding: 24px;
+
+      padding: 12px;
       background: radial-gradient(circle at top, #1f2735 0%, #0e1116 55%);
       color: var(--text);
     }
 
     main {
       display: grid;
-      gap: 20px;
-      max-width: 1000px;
+
+      gap: 12px;
+      max-width: 200px;
       margin: 0 auto;
     }
 
@@ -46,7 +48,7 @@
     }
 
     header h1 {
-      font-size: 28px;
+      font-size: 20px;
       margin: 0;
     }
 
@@ -72,8 +74,8 @@
 
     .grid {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-      gap: 16px;
+      grid-template-columns: 1fr;
+      gap: 12px;
     }
 
     .card {
@@ -119,8 +121,8 @@
 
     .abilities {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(120px, 1fr));
-      gap: 12px;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 8px;
     }
 
     .ability {
@@ -167,9 +169,9 @@
 
     footer {
       color: var(--muted);
-      font-size: 12px;
+      font-size: 10px;
       text-align: center;
-      margin-top: 8px;
+      margin-top: 6px;
     }
   </style>
 </head>
@@ -375,7 +377,6 @@
         console.error("Fehler beim Laden der Charakterdaten", error);
         document.getElementById("character-name").textContent = "Charakterdaten konnten nicht geladen werden";
       });
-
   </script>
 </body>
 </html>
