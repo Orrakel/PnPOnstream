@@ -1,1 +1,56 @@
-viewer.html
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>PnPOnstream – Charakterbogen</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="overview">
+  <main>
+    <header>
+      <h1>Charakterübersicht</h1>
+      <p>Wähle einen Charakter aus, um das Charakterblatt zu öffnen.</p>
+    </header>
+
+    <section class="card">
+      <h2>Charaktere</h2>
+      <div class="character-grid" id="character-grid"></div>
+    </section>
+  </main>
+
+  <footer>Testdaten für die Twitch-Extension – Übersicht mit Platzhaltern.</footer>
+
+  <script>
+    const characters = [
+      { id: "hubert", name: "Hubert", image: "./data/srsly.png" },
+      { id: "kiew", name: "Kiew", image: "./data/Kiew.png" },
+      { id: "radagast", name: "Radagast", image: "./data/cry.png" },
+      { id: "garo", name: "Garo", image: "./data/ProfilScience.jpg" }
+    ];
+
+    const renderCharacterGrid = () => {
+      const grid = document.getElementById("character-grid");
+      grid.innerHTML = "";
+      characters.forEach(character => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "character-card";
+        button.dataset.characterId = character.id;
+        button.innerHTML = `
+          <img src="${character.image}" alt="Platzhalter für ${character.name}">
+          <span>${character.name}</span>
+        `;
+        button.addEventListener("click", () => {
+          window.location.href = `./character.html?id=${character.id}`;
+        });
+        grid.appendChild(button);
+      });
+    };
+    renderCharacterGrid();
+  </script>
+</body>
+</html>
