@@ -1,0 +1,82 @@
+{
+  "name": "Radagast",
+  "title": "Der Druide der Wildnis",
+  "race": "Elf (Waldelf)",
+  "class": "Druide",
+  "level": 7,
+  "background": "Einsiedler",
+  "alignment": "Neutral Gut",
+  "experience": 23000,
+  "proficiencyBonus": 3,
+  "inspiration": 1,
+  "hitPoints": {
+    "current": 46,
+    "max": 46,
+    "temporary": 0
+  },
+  "armorClass": 15,
+  "initiative": 1,
+  "speed": "35 ft",
+  "hitDice": "7d8",
+  "passivePerception": 15,
+  "savingThrows": [
+    { "name": "Intelligenz", "bonus": 4, "proficient": true },
+    { "name": "Weisheit", "bonus": 6, "proficient": true }
+  ],
+  "abilityScores": [
+    { "name": "Stärke", "score": 10, "modifier": 0 },
+    { "name": "Geschicklichkeit", "score": 12, "modifier": 1 },
+    { "name": "Konstitution", "score": 14, "modifier": 2 },
+    { "name": "Intelligenz", "score": 14, "modifier": 2 },
+    { "name": "Weisheit", "score": 18, "modifier": 4 },
+    { "name": "Charisma", "score": 11, "modifier": 0 }
+  ],
+  "skills": [
+    { "name": "Natur", "ability": "INT", "bonus": 5, "proficient": true },
+    { "name": "Tierkunde", "ability": "WEI", "bonus": 7, "proficient": true },
+    { "name": "Wahrnehmung", "ability": "WEI", "bonus": 7, "proficient": true },
+    { "name": "Medizin", "ability": "WEI", "bonus": 7, "proficient": true },
+    { "name": "Überleben", "ability": "WEI", "bonus": 7, "proficient": true },
+    { "name": "Heimlichkeit", "ability": "GES", "bonus": 1, "proficient": false }
+  ],
+  "attacks": [
+    { "name": "Viertelstab", "bonus": 4, "damage": "1d6 + 0 Wucht" },
+    { "name": "Dornpeitsche", "bonus": 7, "damage": "1d6 Stich" }
+  ],
+  "features": [
+    "Wilde Gestalt (2x/Tag)",
+    "Naturerholung",
+    "Kreis der Erde",
+    "Druidenische Sprache"
+  ],
+  "spellcasting": {
+    "castingAbility": "Weisheit",
+    "spellSaveDC": 15,
+    "spellAttackBonus": 7,
+    "spellSlots": {
+      "level1": { "total": 4, "used": 1 },
+      "level2": { "total": 3, "used": 0 }
+    },
+    "cantrips": ["Druidcraft", "Guidance", "Produce Flame"],
+    "prepared": [
+      "Heilende Worte",
+      "Donnerwoge",
+      "Mondstrahl",
+      "Spinnenklettern",
+      "Borkenhaut"
+    ]
+  },
+  "equipment": [
+    "Viertelstab",
+    "Druidenfokus (Stein)",
+    "Reiseproviant",
+    "Kräuterbeutel",
+    "Umhang aus Moos"
+  ],
+  "personality": {
+    "traits": "Spricht mit jedem Tier wie mit einem alten Freund.",
+    "ideals": "Balance — Die Natur ist der wahre Richter.",
+    "bonds": "Hütet einen uralten Hain.",
+    "flaws": "Vertraut der Zivilisation nur widerwillig."
+  }
+}

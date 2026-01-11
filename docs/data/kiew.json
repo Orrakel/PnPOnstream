@@ -1,0 +1,82 @@
+{
+  "name": "Kiew",
+  "title": "Der Hexenmeister",
+  "race": "Mensch",
+  "class": "Warlock",
+  "level": 5,
+  "background": "Gelehrter",
+  "alignment": "Neutral",
+  "experience": 6500,
+  "proficiencyBonus": 3,
+  "inspiration": 0,
+  "hitPoints": {
+    "current": 34,
+    "max": 34,
+    "temporary": 0
+  },
+  "armorClass": 13,
+  "initiative": 2,
+  "speed": "30 ft",
+  "hitDice": "5d8",
+  "passivePerception": 12,
+  "savingThrows": [
+    { "name": "Weisheit", "bonus": 3, "proficient": true },
+    { "name": "Charisma", "bonus": 6, "proficient": true }
+  ],
+  "abilityScores": [
+    { "name": "Stärke", "score": 9, "modifier": -1 },
+    { "name": "Geschicklichkeit", "score": 14, "modifier": 2 },
+    { "name": "Konstitution", "score": 14, "modifier": 2 },
+    { "name": "Intelligenz", "score": 12, "modifier": 1 },
+    { "name": "Weisheit", "score": 11, "modifier": 0 },
+    { "name": "Charisma", "score": 18, "modifier": 4 }
+  ],
+  "skills": [
+    { "name": "Arkane Kunde", "ability": "INT", "bonus": 4, "proficient": true },
+    { "name": "Täuschung", "ability": "CHA", "bonus": 6, "proficient": true },
+    { "name": "Einschüchtern", "ability": "CHA", "bonus": 6, "proficient": true },
+    { "name": "Nachforschungen", "ability": "INT", "bonus": 4, "proficient": true },
+    { "name": "Wahrnehmung", "ability": "WEI", "bonus": 2, "proficient": false },
+    { "name": "Heimlichkeit", "ability": "GES", "bonus": 2, "proficient": false }
+  ],
+  "attacks": [
+    { "name": "Eldritch Blast", "bonus": 6, "damage": "1d10 + 4 Energieschaden" },
+    { "name": "Dolch", "bonus": 5, "damage": "1d4 + 2 Stich" }
+  ],
+  "features": [
+    "Pakt der Kette",
+    "Dunkelsicht (Eldritch Sight)",
+    "Agonisierender Strahl",
+    "Teufelssicht"
+  ],
+  "spellcasting": {
+    "castingAbility": "Charisma",
+    "spellSaveDC": 14,
+    "spellAttackBonus": 6,
+    "spellSlots": {
+      "level1": { "total": 0, "used": 0 },
+      "level2": { "total": 2, "used": 1 }
+    },
+    "cantrips": ["Eldritch Blast", "Mage Hand"],
+    "prepared": [
+      "Hex",
+      "Rüstung des Agathys",
+      "Dunkelheit",
+      "Fluch",
+      "Nebelschritt"
+    ]
+  },
+  "equipment": [
+    "Arkaner Fokus",
+    "Lederumhang",
+    "Dolch",
+    "Schriftrollenmappe",
+    "Trank des Heilens"
+  ],
+  "personality": {
+    "traits": "Sammelt jede verbotene Schriftrolle.",
+    "ideals": "Macht — Wissen bedeutet Kontrolle.",
+    "bonds": "Schützt seinen Paktgeist um jeden Preis.",
+    "flaws": "Misstraut jeder helfenden Hand."
+  }
+}
