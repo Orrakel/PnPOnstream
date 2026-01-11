@@ -23,7 +23,6 @@
 
     body {
       margin: 0;
-
       padding: 12px;
       background: radial-gradient(circle at top, #1f2735 0%, #0e1116 55%);
       color: var(--text);
@@ -31,7 +30,6 @@
 
     main {
       display: grid;
-
       gap: 12px;
       max-width: 200px;
       margin: 0 auto;
@@ -88,6 +86,49 @@
     .card h2 {
       margin: 0 0 12px;
       font-size: 18px;
+    }
+
+    .character-grid {
+      display: grid;
+      grid-template-columns: repeat(2, minmax(0, 1fr));
+      gap: 10px;
+    }
+
+    .character-card {
+      background: var(--panel-light);
+      border: 1px solid transparent;
+      border-radius: 12px;
+      padding: 8px;
+      text-align: center;
+      cursor: pointer;
+      font: inherit;
+      color: inherit;
+      transition: border-color 0.2s ease, transform 0.2s ease;
+    }
+
+    .character-card:hover {
+      border-color: var(--accent);
+      transform: translateY(-1px);
+    }
+
+    .character-card.active {
+      border-color: var(--accent);
+      box-shadow: 0 0 0 1px rgba(124, 92, 255, 0.4);
+    }
+
+    .character-card img {
+      width: 100%;
+      height: 72px;
+      border-radius: 8px;
+      object-fit: cover;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .character-card span {
+      display: block;
+      font-size: 12px;
+      color: var(--text);
     }
 
     .stat-row {
@@ -177,6 +218,11 @@
 </head>
 <body>
   <main>
+    <section class="card">
+      <h2>Charaktere</h2>
+      <div class="character-grid" id="character-grid"></div>
+    </section>
+
     <header>
       <h1 id="character-name">Lade Charakter...</h1>
       <p id="character-meta"></p>
@@ -269,9 +315,21 @@
       });
     };
 
-    fetch("./data/hubert.json")
-      .then(response => response.json())
-      .then(data => {
+    const formatBonus = value => {
+      if (typeof value === "number") {
+        return `${value >= 0 ? "+" : ""}${value}`;
+      }
+      return value;
+    };
+
+    const characters = [
+      { id: "hubert", name: "Hubert", image: "./data/placeholder-hubert.svg" },
+      { id: "kiew", name: "Kiew", image: "./data/placeholder-kiew.svg" },
+      { id: "radagast", name: "Radagast", image: "./data/placeholder-radagast.svg" },
+      { id: "garo", name: "Garo", image: "./data/placeholder-garo.svg" }
+    ];
+
+    const loadCharacter = data => {
         document.getElementById("character-name").textContent = data.name;
         document.getElementById("character-meta").textContent = `${data.title} · ${data.race} · ${data.class} Stufe ${data.level}`;
 
@@ -285,7 +343,7 @@
         addPills(document.getElementById("character-tags"), tags);
 
         document.getElementById("armor-class").textContent = data.armorClass;
-        document.getElementById("initiative").textContent = `+${data.initiative}`;
+        document.getElementById("initiative").textContent = formatBonus(data.initiative);
         document.getElementById("speed").textContent = data.speed;
         document.getElementById("hit-points").textContent = `${data.hitPoints.current}/${data.hitPoints.max}`;
         document.getElementById("hit-dice").textContent = data.hitDice;
@@ -333,7 +391,7 @@
 
         document.getElementById("spell-ability").textContent = data.spellcasting.castingAbility;
         document.getElementById("spell-save").textContent = data.spellcasting.spellSaveDC;
-        document.getElementById("spell-attack").textContent = `+${data.spellcasting.spellAttackBonus}`;
+        document.getElementById("spell-attack").textContent = formatBonus(data.spellcasting.spellAttackBonus);
         document.getElementById("slots-l1").textContent = `${data.spellcasting.spellSlots.level1.used}/${data.spellcasting.spellSlots.level1.total}`;
         document.getElementById("slots-l2").textContent = `${data.spellcasting.spellSlots.level2.used}/${data.spellcasting.spellSlots.level2.total}`;
 
@@ -372,11 +430,54 @@
           row.innerHTML = `<span>${entry}</span>`;
           personalityContainer.appendChild(row);
         });
-      })
-      .catch(error => {
-        console.error("Fehler beim Laden der Charakterdaten", error);
-        document.getElementById("character-name").textContent = "Charakterdaten konnten nicht geladen werden";
+    };
+
+    const renderCharacterGrid = () => {
+      const grid = document.getElementById("character-grid");
+      grid.innerHTML = "";
+      characters.forEach(character => {
+        const button = document.createElement("button");
+        button.type = "button";
+        button.className = "character-card";
+        button.dataset.characterId = character.id;
+        button.innerHTML = `
+          <img src="${character.image}" alt="Platzhalter für ${character.name}">
+          <span>${character.name}</span>
+        `;
+        button.addEventListener("click", () => selectCharacter(character.id));
+        grid.appendChild(button);
       });
+    };
+
+    const selectCharacter = characterId => {
+      const target = characters.find(character => character.id === characterId);
+      if (!target) {
+        return;
+      }
+
+      document.querySelectorAll(".character-card").forEach(card => {
+        card.classList.remove("active");
+      });
+
+      const activeCard = document.querySelector(
+        `.character-card[data-character-id="${target.id}"]`
+      );
+
+      if (activeCard) {
+        activeCard.classList.add("active");
+      }
+
+      fetch(`./data/${target.id}.json`)
+        .then(response => response.json())
+        .then(loadCharacter)
+        .catch(error => {
+          console.error("Fehler beim Laden der Charakterdaten", error);
+          document.getElementById("character-name").textContent = "Charakterdaten konnten nicht geladen werden";
+        });
+    };
+
+    renderCharacterGrid();
+    selectCharacter("hubert");
   </script>
 </body>
 </html>
