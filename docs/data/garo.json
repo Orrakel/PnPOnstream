@@ -1,0 +1,78 @@
+{
+  "name": "Garo",
+  "title": "Der unaufhaltsame Kämpfer",
+  "race": "Zwerg (Bergzwerg)",
+  "class": "Fighter",
+  "level": 20,
+  "background": "Soldat",
+  "alignment": "Rechtschaffen Neutral",
+  "experience": 355000,
+  "proficiencyBonus": 6,
+  "inspiration": 0,
+  "hitPoints": {
+    "current": 210,
+    "max": 210,
+    "temporary": 0
+  },
+  "armorClass": 20,
+  "initiative": 1,
+  "speed": "25 ft",
+  "hitDice": "20d10",
+  "passivePerception": 16,
+  "savingThrows": [
+    { "name": "Stärke", "bonus": 11, "proficient": true },
+    { "name": "Konstitution", "bonus": 10, "proficient": true }
+  ],
+  "abilityScores": [
+    { "name": "Stärke", "score": 22, "modifier": 6 },
+    { "name": "Geschicklichkeit", "score": 12, "modifier": 1 },
+    { "name": "Konstitution", "score": 20, "modifier": 5 },
+    { "name": "Intelligenz", "score": 10, "modifier": 0 },
+    { "name": "Weisheit", "score": 14, "modifier": 2 },
+    { "name": "Charisma", "score": 8, "modifier": -1 }
+  ],
+  "skills": [
+    { "name": "Athletik", "ability": "STR", "bonus": 12, "proficient": true },
+    { "name": "Wahrnehmung", "ability": "WEI", "bonus": 6, "proficient": true },
+    { "name": "Überleben", "ability": "WEI", "bonus": 6, "proficient": true },
+    { "name": "Einschüchtern", "ability": "CHA", "bonus": 5, "proficient": true },
+    { "name": "Akrobatik", "ability": "GES", "bonus": 1, "proficient": false },
+    { "name": "Geschichte", "ability": "INT", "bonus": 0, "proficient": false }
+  ],
+  "attacks": [
+    { "name": "Großaxt", "bonus": 12, "damage": "1d12 + 6 Hieb" },
+    { "name": "Handaxt", "bonus": 12, "damage": "1d6 + 6 Hieb" },
+    { "name": "Armbrust", "bonus": 7, "damage": "1d10 + 1 Stich" }
+  ],
+  "features": [
+    "Action Surge (2x)",
+    "Indomitable (3x)",
+    "Champion Archetyp",
+    "Zweiter Wind",
+    "Zusätzlicher Angriff (3)"
+  ],
+  "spellcasting": {
+    "castingAbility": "-",
+    "spellSaveDC": "-",
+    "spellAttackBonus": "-",
+    "spellSlots": {
+      "level1": { "total": 0, "used": 0 },
+      "level2": { "total": 0, "used": 0 }
+    },
+    "cantrips": [],
+    "prepared": []
+  },
+  "equipment": [
+    "Großaxt +2",
+    "Plattenrüstung",
+    "Schild",
+    "Abzeichen des Veteranen",
+    "Reiserationen"
+  ],
+  "personality": {
+    "traits": "Spricht wenig, kämpft viel.",
+    "ideals": "Ehre — Ein Versprechen ist heilig.",
+    "bonds": "Beschützt seine Kriegskameraden.",
+    "flaws": "Kann nicht weichen, selbst wenn es klüger wäre."
+  }
+}
