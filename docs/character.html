@@ -1,0 +1,226 @@
+<!doctype html>
+<html lang="de">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Cache-Control" content="no-store, no-cache, must-revalidate, max-age=0">
+  <meta http-equiv="Pragma" content="no-cache">
+  <meta http-equiv="Expires" content="0">
+  <title>PnPOnstream – Charakterblatt</title>
+  <link rel="stylesheet" href="./style.css">
+</head>
+<body class="character">
+  <main>
+    <header>
+      <a class="link-button" href="./viewer.html">Zurück zur Übersicht</a>
+      <h1 id="character-name">Lade Charakter...</h1>
+      <p id="character-meta"></p>
+      <div class="pill-row" id="character-tags"></div>
+    </header>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Kampfwerte</h2>
+        <div class="stat-row"><span>Rüstungsklasse</span><strong id="armor-class">-</strong></div>
+        <div class="stat-row"><span>Initiative</span><strong id="initiative">-</strong></div>
+        <div class="stat-row"><span>Bewegung</span><strong id="speed">-</strong></div>
+        <div class="stat-row"><span>Trefferpunkte</span><strong id="hit-points">-</strong></div>
+        <div class="stat-row"><span>Trefferwürfel</span><strong id="hit-dice">-</strong></div>
+        <div class="stat-row"><span>Passive Wahrnehmung</span><strong id="passive-perception">-</strong></div>
+      </div>
+
+      <div class="card">
+        <h2>Rettungswürfe</h2>
+        <div class="list" id="saving-throws"></div>
+      </div>
+
+      <div class="card">
+        <h2>Fertigkeiten</h2>
+        <div class="list" id="skills"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Attributswerte</h2>
+      <div class="abilities" id="abilities"></div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Angriffe</h2>
+        <div class="list" id="attacks"></div>
+      </div>
+      <div class="card">
+        <h2>Zauber</h2>
+        <div class="stat-row"><span>Zauberattribut</span><strong id="spell-ability">-</strong></div>
+        <div class="stat-row"><span>SG</span><strong id="spell-save">-</strong></div>
+        <div class="stat-row"><span>Angriff</span><strong id="spell-attack">-</strong></div>
+        <div class="stat-row"><span>Slots L1</span><strong id="slots-l1">-</strong></div>
+        <div class="stat-row"><span>Slots L2</span><strong id="slots-l2">-</strong></div>
+        <h3 class="section-subtitle">Cantrips</h3>
+        <div class="inline-list" id="cantrips"></div>
+        <h3 class="section-subtitle">Vorbereitete Zauber</h3>
+        <div class="inline-list" id="prepared-spells"></div>
+      </div>
+    </section>
+
+    <section class="grid">
+      <div class="card">
+        <h2>Features</h2>
+        <div class="list" id="features"></div>
+      </div>
+      <div class="card">
+        <h2>Ausrüstung</h2>
+        <div class="list" id="equipment"></div>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>Persönlichkeit</h2>
+      <div class="list" id="personality"></div>
+    </section>
+  </main>
+
+  <footer>Testdaten für die Twitch-Extension – Charakteransicht.</footer>
+
+  <script>
+    const addListItems = (container, items, formatFn) => {
+      container.innerHTML = "";
+      items.forEach(item => {
+        const row = document.createElement("div");
+        row.className = "stat-row";
+        row.innerHTML = formatFn(item);
+        container.appendChild(row);
+      });
+    };
+
+    const addPills = (container, items) => {
+      container.innerHTML = "";
+      items.forEach(item => {
+        const pill = document.createElement("span");
+        pill.className = "pill";
+        pill.textContent = item;
+        container.appendChild(pill);
+      });
+    };
+
+    const formatBonus = value => {
+      if (typeof value === "number") {
+        return `${value >= 0 ? "+" : ""}${value}`;
+      }
+      return value;
+    };
+
+    const characterId = new URLSearchParams(window.location.search).get("id") || "hubert";
+
+    fetch(`./data/${characterId}.json`)
+      .then(response => response.json())
+      .then(data => {
+        document.getElementById("character-name").textContent = data.name;
+        document.getElementById("character-meta").textContent = `${data.title} · ${data.race} · ${data.class} Stufe ${data.level}`;
+
+        const tags = [
+          `Hintergrund: ${data.background}`,
+          `Ausrichtung: ${data.alignment}`,
+          `EP: ${data.experience}`,
+          `Inspiration: ${data.inspiration}`,
+          `Prof.-Bonus: +${data.proficiencyBonus}`
+        ];
+        addPills(document.getElementById("character-tags"), tags);
+
+        document.getElementById("armor-class").textContent = data.armorClass;
+        document.getElementById("initiative").textContent = formatBonus(data.initiative);
+        document.getElementById("speed").textContent = data.speed;
+        document.getElementById("hit-points").textContent = `${data.hitPoints.current}/${data.hitPoints.max}`;
+        document.getElementById("hit-dice").textContent = data.hitDice;
+        document.getElementById("passive-perception").textContent = data.passivePerception;
+
+        addListItems(
+          document.getElementById("saving-throws"),
+          data.savingThrows,
+          item => `
+            <span>${item.name}</span>
+            <span class="badge ${item.proficient ? "proficient" : ""}">${item.bonus >= 0 ? "+" : ""}${item.bonus}</span>
+          `
+        );
+
+        const abilityContainer = document.getElementById("abilities");
+        abilityContainer.innerHTML = "";
+        data.abilityScores.forEach(stat => {
+          const card = document.createElement("div");
+          card.className = "ability";
+          card.innerHTML = `
+            <div class="name">${stat.name}</div>
+            <div class="score">${stat.score}</div>
+            <div class="modifier">${stat.modifier >= 0 ? "+" : ""}${stat.modifier}</div>
+          `;
+          abilityContainer.appendChild(card);
+        });
+
+        addListItems(
+          document.getElementById("skills"),
+          data.skills,
+          item => `
+            <span>${item.name} <span style="color: var(--muted);">(${item.ability})</span></span>
+            <span class="badge ${item.proficient ? "proficient" : ""}">${item.bonus >= 0 ? "+" : ""}${item.bonus}</span>
+          `
+        );
+
+        addListItems(
+          document.getElementById("attacks"),
+          data.attacks,
+          item => `
+            <span>${item.name} <span style="color: var(--muted);">(+${item.bonus})</span></span>
+            <strong>${item.damage}</strong>
+          `
+        );
+
+        document.getElementById("spell-ability").textContent = data.spellcasting.castingAbility;
+        document.getElementById("spell-save").textContent = data.spellcasting.spellSaveDC;
+        document.getElementById("spell-attack").textContent = formatBonus(data.spellcasting.spellAttackBonus);
+        document.getElementById("slots-l1").textContent = `${data.spellcasting.spellSlots.level1.used}/${data.spellcasting.spellSlots.level1.total}`;
+        document.getElementById("slots-l2").textContent = `${data.spellcasting.spellSlots.level2.used}/${data.spellcasting.spellSlots.level2.total}`;
+
+        addPills(document.getElementById("cantrips"), data.spellcasting.cantrips);
+        addPills(document.getElementById("prepared-spells"), data.spellcasting.prepared);
+
+        const featureContainer = document.getElementById("features");
+        featureContainer.innerHTML = "";
+        data.features.forEach(feature => {
+          const row = document.createElement("div");
+          row.className = "stat-row";
+          row.innerHTML = `<span>${feature}</span>`;
+          featureContainer.appendChild(row);
+        });
+
+        const equipmentContainer = document.getElementById("equipment");
+        equipmentContainer.innerHTML = "";
+        data.equipment.forEach(item => {
+          const row = document.createElement("div");
+          row.className = "stat-row";
+          row.innerHTML = `<span>${item}</span>`;
+          equipmentContainer.appendChild(row);
+        });
+
+        const personalityContainer = document.getElementById("personality");
+        personalityContainer.innerHTML = "";
+        const personalityEntries = [
+          `Eigenschaft: ${data.personality.traits}`,
+          `Ideal: ${data.personality.ideals}`,
+          `Bindung: ${data.personality.bonds}`,
+          `Makel: ${data.personality.flaws}`
+        ];
+        personalityEntries.forEach(entry => {
+          const row = document.createElement("div");
+          row.className = "stat-row";
+          row.innerHTML = `<span>${entry}</span>`;
+          personalityContainer.appendChild(row);
+        });
+      })
+      .catch(error => {
+        console.error("Fehler beim Laden der Charakterdaten", error);
+        document.getElementById("character-name").textContent = "Charakterdaten konnten nicht geladen werden";
+      });
+  </script>
+</body>
+</html>
